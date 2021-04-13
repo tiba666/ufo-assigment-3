@@ -24,16 +24,21 @@ public class Main {
         Timer timer = new Timer();
         Random r = new Random();
         int i = 0 ;
+        List<Double> times = new ArrayList<>();
         while(i <= 100){
             int number = r.nextInt() % 2;
             if (number==1) {
                 timer.play();
                 tallyCharsOptimazied(reader, freq);
-                System.out.println(timer.check() + " optimized");
+                double check = timer.check();
+                System.out.println(check + " optimized");
+                times.add(check);
             } else {
                 timer.play();
                 tallyChars(reader, freq);
-                System.out.println(timer.check() + " default");
+                double check = timer.check();
+                System.out.println(check + " default");
+                times.add(check);
             }
         i++;
         }
