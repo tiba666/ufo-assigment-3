@@ -11,12 +11,12 @@ import static java.util.stream.Collectors.toMap;
  *
  * @author kasper
  */
-public class Main {
+public class Main_new {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String fileName = "src/main/resources/FoundationSeries.txt";
-        //BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        Reader reader = new FileReader(fileName);
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        //Reader reader = new FileReader(fileName);
         Map<Integer, Long> freq = new HashMap<>();
 
         Timer timer = new Timer();

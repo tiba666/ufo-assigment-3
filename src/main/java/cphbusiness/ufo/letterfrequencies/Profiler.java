@@ -10,7 +10,8 @@ public class Profiler {
             double st = 0.0, sst = 0.0;
             for (int j = 0; j < n; j++) {
                 Main.Timer t = new Main.Timer();
-                for (int i = 0; i < count; i++) //dummy += multiply(i);
+                for (int i = 0; i < count; i++)  //dummy += multiply(i);
+
                 runningTime = t.check();
                 double time = runningTime * 1e9 / count;
                 st += time;
