@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toMap;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String fileName = "C:\\Users\\Tiba\\Desktop\\ufo assigment 3\\letterfrequencies\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
+        String fileName = "src/main/resources/FoundationSeries.txt";
         Reader reader = new FileReader(fileName);
         Map<Integer, Long> freq = new HashMap<>();
 
