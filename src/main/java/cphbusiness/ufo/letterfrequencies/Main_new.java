@@ -1,6 +1,7 @@
 package cphbusiness.ufo.letterfrequencies;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
@@ -21,16 +22,20 @@ public class Main_new {
 
         Timer timer = new Timer();
         Random r = new Random();
-        int i = 0 ;
+        int i = 0;
         List<Double> times = new ArrayList<>();
-        while(i <= 100){
+        while (i <= 100) {
+            /*
             int number = r.nextInt() % 2;
             if (number==1) {
-                timer.play();
-                tallyCharsOptimazied(reader, freq);
-                double check = timer.check();
-                System.out.println(check + " optimized");
-                times.add(check);
+
+             */
+            timer.play();
+            tallyCharsOptimazied(reader, freq);
+            double check = timer.check();
+            System.out.println(check + " optimized");
+            times.add(check);
+                /*
             } else {
                 timer.play();
                 tallyChars(reader, freq);
@@ -38,9 +43,11 @@ public class Main_new {
                 System.out.println(check + " default");
                 times.add(check);
             }
-        i++;
+
+                 */
+            i++;
         }
-       // print_tally(freq);
+        // print_tally(freq);
 
     }
 
@@ -59,7 +66,7 @@ public class Main_new {
     private static void tallyCharsOptimazied(Reader reader, Map<Integer, Long> freq) throws IOException {
         int b;
         while ((b = reader.read()) != -1) {
-            if(freq.get(b) !=null){
+            if (freq.get(b) != null) {
                 freq.put(b, freq.get(b) + 1);
             } else {
                 freq.put(b, 1L);
@@ -88,15 +95,20 @@ public class Main_new {
 
     public static class Timer {
         private long start, spent = 0;
+
         public Timer() {
             play();
         }
+
         public double check() {
-            return (System.nanoTime() - start + spent) / 1e9;
+            double value = System.nanoTime() - start + spent / 1e9;
+            return new BigDecimal(String.valueOf(value)).intValue();
         }
+
         public void pause() {
             spent += System.nanoTime() - start;
         }
+
         public void play() {
             start = System.nanoTime();
         }

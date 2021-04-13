@@ -1,6 +1,7 @@
 package cphbusiness.ufo.letterfrequencies;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
@@ -24,6 +25,7 @@ public class Main {
         int i = 0 ;
         List<Double> times = new ArrayList<>();
         while(i <= 100){
+            /*
             int number = r.nextInt() % 2;
             if (number==1) {
                 timer.play();
@@ -32,12 +34,13 @@ public class Main {
                 System.out.println(check + " optimized");
                 times.add(check);
             } else {
+                */
                 timer.play();
                 tallyChars(reader, freq);
                 double check = timer.check();
                 System.out.println(check + " default");
                 times.add(check);
-            }
+            //}
         i++;
         }
        // print_tally(freq);
@@ -92,7 +95,8 @@ public class Main {
             play();
         }
         public double check() {
-            return (System.nanoTime() - start + spent) / 1e9;
+            double value = System.nanoTime() - start + spent / 1e9;
+            return new BigDecimal(String.valueOf(value)).intValue();
         }
         public void pause() {
             spent += System.nanoTime() - start;
