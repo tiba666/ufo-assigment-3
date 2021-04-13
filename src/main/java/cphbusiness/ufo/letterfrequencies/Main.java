@@ -4,10 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -20,17 +17,26 @@ import static java.util.stream.Collectors.toMap;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String fileName = "C:\\Users\\Tiba\\Desktop\\ufo assigment 3\\letterfrequencies\\src\\main\\resources\\FoundationSeries.txt";
+        String fileName = "C:\\Users\\Tiba\\Desktop\\ufo assigment 3\\letterfrequencies\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
         Reader reader = new FileReader(fileName);
         Map<Integer, Long> freq = new HashMap<>();
-        Map<Integer, Long> freq2 = new HashMap<>();
-        Timer timer = new Timer();
-        tallyCharsOptimazied(reader,freq);
 
-       System.out.println(timer.check()+ " optimized");
-        timer.play();
-        tallyChars(reader, freq2);
-        System.out.println(timer.check() + " default");
+        Timer timer = new Timer();
+        Random r = new Random();
+        int i = 0 ;
+        while(i <= 100){
+            int number = r.nextInt() % 2;
+            if (number==1) {
+                timer.play();
+                tallyCharsOptimazied(reader, freq);
+                System.out.println(timer.check() + " optimized");
+            } else {
+                timer.play();
+                tallyChars(reader, freq);
+                System.out.println(timer.check() + " default");
+            }
+        i++;
+        }
        // print_tally(freq);
 
     }
