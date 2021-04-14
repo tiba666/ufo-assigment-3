@@ -52,6 +52,7 @@ public class Main {
         System.out.println("Average optimized: " + (Arrays.stream(runTimes2).sum() / runTimes2.length) * 1_000 + " ms");
 
         System.out.println("Average unoptimized: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
+        print_tally(freq);
         print_tally(freq2);
 
     }
@@ -75,8 +76,7 @@ public class Main {
         BufferedReader breader = new BufferedReader(reader,10000);
         while ((temp = breader.readLine()) != null) {
             for (char c : temp.toCharArray()){
-                 b = Character.getNumericValue(c);
-
+                b = (int)c;
                 try {
                     freq.put(b, freq.get(b) + 1);
                 } catch (NullPointerException np) {
