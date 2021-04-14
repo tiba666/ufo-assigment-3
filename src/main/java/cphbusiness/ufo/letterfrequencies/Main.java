@@ -27,11 +27,11 @@ public class Main {
             tallyChars(reader, freq);
             runTimes[i] =  t.checkInSec();
         }
-        print_tally(freq);
+        //print_tally(freq);
         for (var e : runTimes) {
             System.out.println("Run  : " + (e * 1_000 + " ms"));
         }
-        System.out.println("Average: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
+        //System.out.println("Average: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
 
         double[] runTimes2 = new double[numberOfTimeInLoop];
         String fileName2 = "src\\main\\resources\\FoundationSeries.txt";
@@ -43,10 +43,12 @@ public class Main {
             tallyChars2(reader2, freq2);
             runTimes2[i] =  t.checkInSec();
         }
-        print_tally(freq2);
+        System.out.println("\n\n\n");
+        //print_tally(freq2);
         for (var e : runTimes2) {
             System.out.println("Run  : " + (e * 1_000 + " ms"));
         }
+        System.out.println("\n\n\n");
         System.out.println("Average optimized: " + (Arrays.stream(runTimes2).sum() / runTimes2.length) * 1_000 + " ms");
 
         System.out.println("Average unoptimized: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
