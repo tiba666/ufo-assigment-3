@@ -68,13 +68,18 @@ public class Main {
 
     private static void tallyChars2(Reader reader, Map<Integer, Long> freq) throws IOException {
         int b;
+        String temp ;
         BufferedReader breader = new BufferedReader(reader,10000);
-        while ((b = breader.read()) != -1) {
+        while ((temp = breader.readLine()) != null) {
+            for (char c : temp.toCharArray()){
+                 b = Character.getNumericValue(c);
+
                 try {
                     freq.put(b, freq.get(b) + 1);
                 } catch (NullPointerException np) {
                     freq.put(b, 1L);
                 }
+            }
 
         }
     }
