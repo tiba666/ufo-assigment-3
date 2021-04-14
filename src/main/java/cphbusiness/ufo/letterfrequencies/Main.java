@@ -1,7 +1,6 @@
 package cphbusiness.ufo.letterfrequencies;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
@@ -15,58 +14,68 @@ import static java.util.stream.Collectors.toMap;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String fileName = "src/main/resources/FoundationSeries.txt";
-        //BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        Reader reader = new FileReader(fileName);
-        Map<Integer, Long> freq = new HashMap<>();
+        Timer t = new Timer();
+//118313
+        int numberOfTimeInLoop = 100;
+        double[] runTimes = new double[numberOfTimeInLoop];
+        String fileName = "C:\\Users\\tiba666\\Desktop\\ufo assigment 3\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
 
-        Timer timer = new Timer();
-        Random r = new Random();
-        int i = 0 ;
-        List<Double> times = new ArrayList<>();
-        while(i <= 100){
-            /*
-            int number = r.nextInt() % 2;
-            if (number==1) {
-                timer.play();
-                tallyCharsOptimazied(reader, freq);
-                double check = timer.check();
-                System.out.println(check + " optimized");
-                times.add(check);
-            } else {
-                */
-                timer.play();
-                tallyChars(reader, freq);
-                double check = timer.check();
-                System.out.println(check + " default");
-                times.add(check);
-            //}
-        i++;
+        Map<Integer, Long> freq = new HashMap<>();
+        for (int i = 0; i < numberOfTimeInLoop; i++) {
+            var reader = new FileReader(fileName);
+            t.play();
+            tallyChars(reader, freq);
+            runTimes[i] =  t.checkInSec();
         }
-       // print_tally(freq);
+        //print_tally(freq);
+        for (var e : runTimes) {
+            System.out.println("Run  : " + (e * 1_000 + " ms"));
+        }
+        System.out.println("Average: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
+
+        double[] runTimes2 = new double[numberOfTimeInLoop];
+        String fileName2 = "C:\\Users\\tiba666\\Desktop\\ufo assigment 3\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
+        Map<Integer, Long> freq2 = new HashMap<>();
+        for (int i = 0; i < numberOfTimeInLoop; i++) {
+            var reader2 = new FileReader(fileName2);
+            t.play();
+            tallyChars2(reader2, freq2);
+            runTimes2[i] =  t.checkInSec();
+        }
+        //print_tally(freq2);
+        for (var e : runTimes2) {
+            System.out.println("Run  : " + (e * 1_000 + " ms"));
+        }
+        System.out.println("Average optimized: " + (Arrays.stream(runTimes2).sum() / runTimes2.length) * 1_000 + " ms");
+
+        System.out.println("Average unoptimized: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
+        //print_tally(freq2);
 
     }
 
     private static void tallyChars(Reader reader, Map<Integer, Long> freq) throws IOException {
         int b;
         while ((b = reader.read()) != -1) {
+
             try {
                 freq.put(b, freq.get(b) + 1);
             } catch (NullPointerException np) {
                 freq.put(b, 1L);
             }
+
         }
     }
 
-
-    private static void tallyCharsOptimazied(Reader reader, Map<Integer, Long> freq) throws IOException {
+    private static void tallyChars2(Reader reader, Map<Integer, Long> freq) throws IOException {
         int b;
-        while ((b = reader.read()) != -1) {
-            if(freq.get(b) !=null){
-                freq.put(b, freq.get(b) + 1);
-            } else {
-                freq.put(b, 1L);
-            }
+        BufferedReader breader = new BufferedReader(reader,10000);
+        while ((b = breader.read()) != -1) {
+                try {
+                    freq.put(b, freq.get(b) + 1);
+                } catch (NullPointerException np) {
+                    freq.put(b, 1L);
+                }
+
         }
     }
 
@@ -88,23 +97,4 @@ public class Main {
             ;
         }
     }
-
-    public static class Timer {
-        private long start, spent = 0;
-        public Timer() {
-            play();
-        }
-        public double check() {
-            double value = System.nanoTime() - start + spent / 1e9;
-            return new BigDecimal(String.valueOf(value)).intValue();
-        }
-        public void pause() {
-            spent += System.nanoTime() - start;
-        }
-        public void play() {
-            start = System.nanoTime();
-        }
-    }
-
-
 }
