@@ -18,7 +18,7 @@ public class Main {
 //118313
         int numberOfTimeInLoop = 100;
         double[] runTimes = new double[numberOfTimeInLoop];
-        String fileName = "C:\\Users\\tiba666\\Desktop\\ufo assigment 3\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
+        String fileName = "src\\main\\resources\\FoundationSeries.txt";
 
         Map<Integer, Long> freq = new HashMap<>();
         for (int i = 0; i < numberOfTimeInLoop; i++) {
@@ -27,29 +27,30 @@ public class Main {
             tallyChars(reader, freq);
             runTimes[i] =  t.checkInSec();
         }
-        //print_tally(freq);
+        print_tally(freq);
         for (var e : runTimes) {
             System.out.println("Run  : " + (e * 1_000 + " ms"));
         }
         System.out.println("Average: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
 
         double[] runTimes2 = new double[numberOfTimeInLoop];
-        String fileName2 = "C:\\Users\\tiba666\\Desktop\\ufo assigment 3\\ufo-assigment-3\\src\\main\\resources\\FoundationSeries.txt";
+        String fileName2 = "src\\main\\resources\\FoundationSeries.txt";
         Map<Integer, Long> freq2 = new HashMap<>();
+
         for (int i = 0; i < numberOfTimeInLoop; i++) {
             var reader2 = new FileReader(fileName2);
             t.play();
             tallyChars2(reader2, freq2);
             runTimes2[i] =  t.checkInSec();
         }
-        //print_tally(freq2);
+        print_tally(freq2);
         for (var e : runTimes2) {
             System.out.println("Run  : " + (e * 1_000 + " ms"));
         }
         System.out.println("Average optimized: " + (Arrays.stream(runTimes2).sum() / runTimes2.length) * 1_000 + " ms");
 
         System.out.println("Average unoptimized: " + (Arrays.stream(runTimes).sum() / runTimes.length) * 1_000 + " ms");
-        //print_tally(freq2);
+        print_tally(freq2);
 
     }
 
