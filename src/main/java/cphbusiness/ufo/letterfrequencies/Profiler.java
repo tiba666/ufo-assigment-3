@@ -1,8 +1,14 @@
 package cphbusiness.ufo.letterfrequencies;
 
+import java.io.IOException;
+
 public class Profiler {
 
-    public static double Mark5() {
+    public static void main(String[] args) throws IOException {
+        Mark5();
+    }
+
+    public static double Mark5() throws IOException {
         int n = 10, count = 1, totalCount = 0;
         double dummy = 0.0, runningTime = 0.0;
         do {
@@ -10,7 +16,10 @@ public class Profiler {
             double st = 0.0, sst = 0.0;
             for (int j = 0; j < n; j++) {
                 Main.Timer t = new Main.Timer();
-                for (int i = 0; i < count; i++)  //dummy += multiply(i);
+                for (int i = 0; i < count; i++) {
+                    String[] strings = new String[0];
+                    Main_new.main(strings); Main_new.main(strings);//dummy += multiply(i);
+                }
 
                 runningTime = t.check();
                 double time = runningTime * 1e9 / count;
